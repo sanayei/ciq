@@ -2,6 +2,7 @@
 Write a program that takes double x and integer y and returns x to the power of y
 '''
 
+
 def power(x, y):
     r = 1
     while y:
@@ -12,11 +13,8 @@ def power(x, y):
     return r
 
 
-
-
-
 if __name__ == '__main__':
     x = 2
     y = 5
 
-    print(x, y, power(x,y))
+    print(x, y, power(x, y))
