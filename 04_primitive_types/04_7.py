@@ -4,6 +4,9 @@ Write a program that takes double x and integer y and returns x to the power of 
 
 
 def power(x, y):
+    if y < 0:
+        y = -y
+        x = 1/x
     r = 1
     while y:
         if y & 1:
