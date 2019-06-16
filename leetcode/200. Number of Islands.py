@@ -44,6 +44,36 @@ def num_islands(arr):
                 dfs(arr, r, c)
     return islands
 
+# iterative solution
+def numIslands(grid):
+
+    if not grid or len(grid) == 0:
+        return 0
+
+    nrows = len(grid)
+    ncols = len(grid[0])
+    count = 0
+
+    def findneighbors(point):
+        r, c = point[0], point[1]
+        return [(r + 1, c), (r, c + 1), (r - 1, c), (r, c - 1)]
+
+    def findIsland(startPoint):
+        q = [startPoint]
+        while len(q) > 0:
+            p = q.pop(0)
+            for r, c in findneighbors(p):
+                if 0 <= r < nrows and 0 <= c < ncols and grid[r][c] == '1':
+                    grid[r][c] = '0'
+                    q.append((r, c))
+
+    for i in range(nrows):
+        for j in range(ncols):
+            if grid[i][j] == '1':
+                count += 1
+                findIsland((i, j))
+    return count
+
 if __name__ == '__main__':
     a = [list('11110'), list('11010'), list('11000'), list('00000')]
     print(a, num_islands(a))
