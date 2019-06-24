@@ -24,6 +24,32 @@
 #         self.left = None
 #         self.right = None
 
+# def preorderTraversal(root):
+#     output = []
+#
+#     def _recursice(node):
+#         if node is None:
+#             return
+#         output.append(node.val)
+#         _recursice(node.left)
+#         _recursice(node.right)
+#
+#     # _recursice(root)
+#
+#     def _iterative(root):
+#         stack = []
+#         stack.append(root)
+#         while stack:
+#             n = stack.pop()
+#             if n is None:
+#                 continue
+#             output.append(n.val)
+#             stack.append(n.right)
+#             stack.append(n.left)
+#
+#     _iterative(root)
+#     return output
+
 def preorderTraversal(root):
     """
     :type root: TreeNode
@@ -63,37 +89,6 @@ def preorderTraversal_iterative(root):
 
 
 
-# Given a binary tree, return the inorder traversal of its nodes' values.
-#
-# Example:
-#
-# Input: [1,null,2,3]
-#    1
-#     \
-#      2
-#     /
-#    3
-#
-# Output: [1,3,2]
-# Follow up: Recursive solution is trivial, could you do it iteratively?
-
-def inorderTraversal(root):
-    """
-    :type root: TreeNode
-    :rtype: List[int]
-    """
-    list_nodes = []
-
-    def _helper(node):
-        if node is None:
-            return
-        else:
-            _helper(node.left)
-            list_nodes.append(node.val)
-            _helper(node.right)
-
-    _helper(root)
-    return list_nodes
 
 
 
