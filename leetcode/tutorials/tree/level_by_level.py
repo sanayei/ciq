@@ -6,6 +6,27 @@ class Node(object):
     self.left = left
     self.right = right
 
+
+def levelOrder_2(root):
+    from collections import deque
+    cur = deque()
+    nxt = deque()
+    output = []
+    cur.append(root)
+    while len(cur) > 0:
+        subans = []
+        for i in range(len(cur)):
+            n = cur.popleft()
+            if n is None:
+                continue
+            subans.append(n.val)
+            nxt.append(n.left)
+            nxt.append(n.right)
+        if len(subans) > 0:
+            output.append(subans)
+        cur = nxt
+    return output
+
 def levelOrder(root):
     """
     :type root: TreeNode
