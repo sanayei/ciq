@@ -13,18 +13,22 @@
 
 
 def maxSubArray(nums):
-    if not nums or len(nums) == 0:
+    if nums is None or len(nums) == 0:
         return 0
     n = len(nums)
-    o = [0] * n
-    o[0] = nums[0]
-    maxsofar = o[0]
-    for j in range(1, n):
-        o[j] = max(o[j - 1] + nums[j], 0)
-        maxsofar = max(maxsofar, o[j])
-    return maxsofar
+    if n == 1:
+        return nums[0]
+
+    max_ = -float('inf')
+    sum_ = 0
+    for i in nums:
+        sum_ = max(i, sum_ + i)
+        max_ = max(max_, sum_)
+    return max_
 
 
 if __name__ == '__main__':
-    nums = [1]
+    nums = [-2,1,-3,4,-1,2,1,-5,4]
+    print maxSubArray(nums)
+    nums = [-2,1]
     print maxSubArray(nums)
