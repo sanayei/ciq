@@ -14,6 +14,8 @@ def combinations(lst, k):
     return output
 
 
+
+
 # find all subsets of a given set
 def subsets(lst):
     n = len(lst)
@@ -24,7 +26,9 @@ def subsets(lst):
 
 if __name__ == '__main__':
     a = [1, 5, 10, 25]
+    b = [-1,0,1,2,-1,-4]
 
     print(combinations(a, 2))
+    print(combinations(b, 3))
 
     print(subsets(a))
