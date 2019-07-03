@@ -6,7 +6,7 @@ def permutation(lst):
             output.append(lst.copy())
         for i in range(sidx, n):
             lst[i], lst[sidx] = lst[sidx], lst[i]
-            backtrack(i + 1)
+            backtrack(sidx + 1)
             lst[i], lst[sidx] = lst[sidx], lst[i]
     backtrack()
 
