@@ -14,6 +14,9 @@ def multiply(num1, num2):
 
 
 def addBinary(a, b):
+    a = a[::-1]
+    b = b[::-1]
+
     carry, res, = 0, []
     for i in range(max(len(a), len(b))):
         s = carry
@@ -28,6 +31,6 @@ def addBinary(a, b):
 
 
 if __name__ == '__main__':
-    a = '11'
-    b ='1'
+    a = '1010'
+    b = '1011'
     print(addBinary(a,b))
