@@ -1,4 +1,4 @@
-def _add(num1, num2):
+def multiply(num1, num2):
     res = [0] * (len(num1) + len(num2))
     for i in range(len(num1) - 1, -1, -1):
         carry = 0
@@ -13,7 +13,21 @@ def _add(num1, num2):
     return res
 
 
+def addBinary(a, b):
+    carry, res, = 0, []
+    for i in range(max(len(a), len(b))):
+        s = carry
+        if i < len(a): s += int(a[i])
+        if i < len(b): s += int(b[i])
+        carry = s // 2
+        rem = s % 2
+        print(rem)
+        res.append(str(rem))
+    if carry: res.append('1')
+    return ''.join(res[::-1])
+
+
 if __name__ == '__main__':
     a = '11'
     b ='1'
-    print(_add(a,b))
+    print(addBinary(a,b))
