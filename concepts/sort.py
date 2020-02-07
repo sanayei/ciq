@@ -12,7 +12,7 @@ def quicksort(nums):
     return quicksort(ls) + eq + quicksort(rs)
 
 
-def quicksort2(nums, left=None, right=None):
+def quicksort2(nums):
     def _partition(l, r):
         pivot = random.choice(nums[l:r])
         i = j = l
@@ -22,26 +22,47 @@ def quicksort2(nums, left=None, right=None):
                 i += 1
             j += 1
         nums[i], nums[r] = nums[r], nums[i]
-
         return i
+
+    def _sort(nums, left, right):
+        if left < right:
+            p = _partition(left, right)
+            _sort(nums, left, p - 1)
+            _sort(nums, p + 1, right)
 
     if len(nums) <= 1:
         return nums
-    if left is None:
-        left = 0
-    if right is None:
-        right = len(nums) - 1
-
-    if left < right:
-        p = _partition(left, right)
-        quicksort2(nums, left, p - 1)
-        quicksort2(nums, p + 1, right)
-
+    _sort(nums, 0, len(nums)-1)
     return nums
 
 
-def mergesort(nums):
+def quickselect(nums, k):
+    def _partition(left, right):
+        p = nums[right]
+        i = j = left
+        while j < right:
+            if nums[j] < p:
+                nums[i], nums[j] = nums[j], nums[i]
+                i += 1
+            j += 1
+        nums[i], nums[right] = nums[right], nums[i]
+        return i
 
+    def _select(left, right, k):
+        if left == right:
+            return left
+        i = _partition(left, right)
+        if i == k:
+            return i
+        elif i > k:
+            return _select(left, i - 1, k)
+        else:
+            return _select(i + 1, right, k)
+    idx = _select(0, len(nums) - 1, k)
+    return nums[:idx], nums[idx], nums[idx+1:]
+
+
+def mergesort(nums):
     def _merge(A, B):
         ret = []
         i, j = 0, 0
@@ -57,17 +78,19 @@ def mergesort(nums):
 
         return ret
 
-    if len(nums)<= 1:
+    if len(nums) <= 1:
         return nums
-    p = len(nums) //2
+    p = len(nums) // 2
     left = mergesort(nums[:p])
     right = mergesort(nums[p:])
     return _merge(left, right)
 
-nums = [4, 5, 1, 8, 3, 1, 7, 10, 9]
 
 if __name__ == '__main__':
+    nums = [4, 5, 1, 8, 3, 1, 7, 10, 9]
     print(nums)
     print(quicksort(nums))
     print(quicksort2(nums))
     print(mergesort(nums))
+
+    print(quickselect(nums, k=3))

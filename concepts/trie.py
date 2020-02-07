@@ -4,6 +4,7 @@ class TrieNode:
         self.children = {}
         self.isEnd = False
 
+
 class Trie:
     def __init__(self):
         self.root = TrieNode(None)
@@ -59,13 +60,34 @@ class Trie:
         dfs(cur, [])
         return [prefix + el for el in res]
 
+    def search2(self, word: str) -> bool:
+        """
+        Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+        """
+        self.isFound = False
 
+        def dfs(word, cur):
+            if len(word) == 0 and cur.isEnd:
+                self.isFound = True
+                return
+            elif word[0] == '.':
+                for char in cur.children:
+                    dfs(word[1:], cur.children[char])
+            else:
+                if word[0] in cur.children:
+                    dfs(word[1:], cur.children[word[0]])
+                else:
+                    return
+
+        dfs(word, self.root)
+        return self.isFound
 
 if __name__ == '__main__':
-    words = ['ami2323232', 'america', 'amir.sanayei', 'amir']
+    words = [["at"], ["and"], ["an"], ["add"], ["bat"]]
+    searchs = [["a"], [".at"], [".at"], ["an."], ["a.d."], ["b."], ["a.d"], ["."]]
     trie = Trie()
-    for w in words:
-        trie.insert(w)
-    print(trie.search('amir'))
-    print(trie.search('ami'))
-    print(trie.startsWith('am'))
+    for word in words:
+        trie.insert(word)
+
+    for s in searchs:
+        print(trie.search2(s))
